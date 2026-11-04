@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Gantt project controls</title>
+  <style>:root{--bg:#fff;--fg:#1f2328;--muted:#656d76;--line:#e3e6ea;--panel:#f6f8fa;--accent:#2f6fdf;--bad:#d1242f;--good:#1a7f37;--warn:#9a6700}@media (prefers-color-scheme:dark){:root{--bg:#16181d;--fg:#e6e8eb;--muted:#9aa3ad;--line:#2b3038;--panel:#1d2027;--accent:#6ea2ff;--bad:#ff7b72;--good:#3fb950;--warn:#d29922}}html,body{background:var(--bg);height:100%;color:var(--fg);margin:0;font:13px system-ui,sans-serif}body{flex-direction:column;display:flex}header{border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:center;gap:10px 16px;padding:8px 12px;display:flex}header nav{flex-wrap:wrap;gap:2px;display:flex}header nav button{color:var(--fg);cursor:pointer;font:inherit;background:0 0;border:1px solid #0000;border-radius:6px;padding:4px 8px}header nav button[aria-selected=true]{background:var(--accent);color:#fff}#status{color:var(--muted);margin-left:auto}main{flex:1;min-height:0;overflow:auto}main>section{padding:10px 12px}main>section[hidden]{display:none}.bar{flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:8px;display:flex}.bar label{align-items:center;gap:6px;display:inline-flex}h2{margin:14px 0 6px;font-size:14px}h2:first-child{margin-top:0}.muted{color:var(--muted)}.bad{color:var(--bad)}.good{color:var(--good)}.warn{color:var(--warn)}table{border-collapse:collapse;width:100%;margin-bottom:8px}th,td{border-bottom:1px solid var(--line);text-align:left;vertical-align:top;padding:4px 6px}th{background:var(--panel);font-weight:600;position:sticky;top:0}td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}tr.click{cursor:pointer}tr.click:hover td,tr.sel td{background:color-mix(in srgb, var(--accent) 12%, transparent)}.tiles{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:10px;display:grid}.tile{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 10px}.tile b{font-variant-numeric:tabular-nums;margin-top:2px;font-size:18px;display:block}.tile small{color:var(--muted)}.cards{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;display:grid}.card{border:1px solid var(--line);border-radius:8px;padding:8px 10px}.card h3{text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 6px;font-size:12px}.card dl{grid-template-columns:auto 1fr;gap:2px 10px;margin:0;display:grid}.card dd{text-align:right;font-variant-numeric:tabular-nums;margin:0}.grid2{grid-template-columns:minmax(0,1fr) 320px;gap:10px;display:grid}.grid3{grid-template-columns:260px minmax(0,1fr) 340px;gap:10px;min-height:520px;display:grid}@media (width<=900px){.grid2,.grid3{grid-template-columns:1fr}}#gantt{border:1px solid var(--line);height:52vh;min-height:320px}#hist{color:var(--fg);overflow-x:auto}#bim{border:1px solid var(--line);min-height:420px;position:relative}aside.panel{border:1px solid var(--line);background:var(--panel);border-radius:8px;max-height:72vh;padding:8px 10px;overflow:auto}form.inline{border:1px solid var(--line);background:var(--panel);border-radius:8px;flex-wrap:wrap;align-items:end;gap:6px 10px;margin-bottom:10px;padding:8px;display:flex}form.inline label{color:var(--muted);flex-direction:column;gap:2px;font-size:12px;display:flex}form.inline input,form.inline select{font:inherit}.error{color:var(--bad)}.badge{border:1px solid var(--line);border-radius:9px;padding:0 6px;font-size:11px;display:inline-block}.tree{max-height:60vh;margin:0;padding:0;list-style:none;overflow:auto}.tree button{color:var(--fg);cursor:pointer;font:inherit;text-align:left;background:0 0;border:0;border-radius:4px;width:100%;padding:2px 4px}.tree button[aria-current=true]{background:var(--accent);color:#fff}.dg-bar.lp{box-shadow:0 0 0 2px #f59e0b}svg.curve text{fill:currentColor;font-size:10px}</style>
+  <script type="module" crossorigin src="./assets/controls-VHdepCfH.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/gantt-CMhVHQkb.js">
+  <link rel="modulepreload" crossorigin href="./assets/site-data-DxOcvsjn.js">
+  <link rel="modulepreload" crossorigin href="./assets/xer-DwhqJl7h.js">
+</head>
+<body>
+  <header>
+    <strong>Riverside Residences · project controls</strong>
+    <nav role="tablist" aria-label="Modules">
+      <button role="tab" data-tab="schedule">Schedule (P6)</button>
+      <button role="tab" data-tab="cost">Resources &amp; cost</button>
+      <button role="tab" data-tab="boq">BOQ &amp; BOM</button>
+      <button role="tab" data-tab="procurement">Procurement</button>
+      <button role="tab" data-tab="store">Store / General Issue</button>
+      <button role="tab" data-tab="labour">Labour</button>
+      <button role="tab" data-tab="hindrances">Issues &amp; hindrances</button>
+      <button role="tab" data-tab="observations">Observations</button>
+      <button role="tab" data-tab="qc">QC</button>
+      <button role="tab" data-tab="dpr">DPR</button>
+      <button role="tab" data-tab="locations">Locations &amp; BIM</button>
+    </nav>
+    <span id="status" aria-live="polite"></span>
+    <button id="reset" type="button">Reset demo</button>
+  </header>
+  <main>
+    <section id="tab-schedule" role="tabpanel">
+      <div class="bar">
+        <label>Data date <input id="dataDate" type="date"></label>
+        <label>Progress <select id="logic"><option value="retained">Retained logic</option><option value="override">Progress override</option></select></label>
+        <label>Group by <select id="group"><option value="wbs">WBS</option><option value="Zone">Zone code</option><option value="Phase">Phase code</option><option value="floor">Location</option></select></label>
+        <label><input id="showBaseline" type="checkbox"> Baseline</label>
+        <label><input id="useHindrances" type="checkbox"> Hindrances move the schedule</label>
+        <label><input id="levelled" type="checkbox"> Level resources</label>
+        <input id="xerFile" type="file" accept=".xer" hidden><button id="importXer" type="button">Import XER…</button>
+        <button id="exportXer" type="button">Export XER</button>
+      </div>
+      <div class="grid2">
+        <div>
+          <div id="gantt"></div>
+          <div class="bar" style="margin-top:8px"><strong>Resource usage</strong><select id="histRes" aria-label="Resource"></select><span id="histNote" class="muted"></span></div>
+          <div id="hist"></div>
+        </div>
+        <aside class="panel" id="taskPanel"></aside>
+      </div>
+    </section>
+    <section id="tab-cost" role="tabpanel" hidden></section>
+    <section id="tab-boq" role="tabpanel" hidden></section>
+    <section id="tab-procurement" role="tabpanel" hidden></section>
+    <section id="tab-store" role="tabpanel" hidden></section>
+    <section id="tab-labour" role="tabpanel" hidden></section>
+    <section id="tab-hindrances" role="tabpanel" hidden></section>
+    <section id="tab-observations" role="tabpanel" hidden></section>
+    <section id="tab-qc" role="tabpanel" hidden></section>
+    <section id="tab-dpr" role="tabpanel" hidden></section>
+    <section id="tab-locations" role="tabpanel" hidden>
+      <div class="grid3">
+        <div>
+          <h2>Location hierarchy</h2>
+          <ul class="tree" id="tree"></ul>
+          <h2>Create a tower</h2>
+          <form class="inline" id="genForm">
+            <label>Id <input name="id" required size="3" value="C"></label>
+            <label>Name <input name="name" required size="10" value="Tower C"></label>
+            <label>Floors <input name="floors" type="number" min="1" max="80" value="12" style="width:5em"></label>
+            <label>Basements <input name="basements" type="number" min="0" max="6" value="2" style="width:4em"></label>
+            <label>Podiums <input name="podiums" type="number" min="0" max="6" value="1" style="width:4em"></label>
+            <label>Units / floor <input name="units" type="number" min="0" max="40" value="6" style="width:4em"></label>
+            <label>Unit areas m² <input name="areas" value="72, 96, 120" size="10"></label>
+            <button type="submit">Generate</button>
+          </form>
+        </div>
+        <div>
+          <div class="bar"><strong>BIM</strong><span id="bimLabel" class="muted"></span><button id="bimAll" type="button">All floors</button></div>
+          <div id="bim"></div>
+        </div>
+        <aside class="panel" id="info"></aside>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

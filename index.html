@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Gantt demo</title>
+  <style>html,body{height:100%;margin:0;font:13px system-ui,sans-serif}body{flex-direction:column;display:flex}header{border-bottom:1px solid #ddd;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;display:flex}header label{align-items:center;gap:4px;display:flex}#status{color:#2f6fdf}#stats{color:#666;font-variant-numeric:tabular-nums;margin-left:auto}#chart{flex:1;min-height:0}@media (prefers-color-scheme:dark){body{color:#e6e8eb;background:#16181d}header{border-color:#2b3038}#stats{color:#9aa3ad}}</style>
+  <script type="module" crossorigin src="./assets/index-BsB2UbE8.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/gantt-CMhVHQkb.js">
+  <link rel="modulepreload" crossorigin href="./assets/data-BBFLjoW6.js">
+</head>
+<body>
+  <header>
+    <nav><a href="./index.html">Gantt</a> · <a href="./react.html">React</a> · <a href="./site.html">Site</a> · <a href="./controls.html">Project controls</a> · <a href="./setup.html">Project setup</a></nav>
+    <label>Data
+      <select id="dataset">
+        <option value="20000">20,000 tasks</option>
+        <option value="2000">2,000 tasks</option>
+        <option value="200">200 tasks</option>
+        <option value="60">60 tasks</option>
+      </select>
+    </label>
+    <label>MS Project XML <input id="msp" type="file" accept=".xml"></label>
+    <label>Zoom
+      <select id="zoom">
+        <option value="day">Days</option>
+        <option value="week">Weeks</option>
+        <option value="month">Months</option>
+      </select>
+    </label>
+    <label>Theme
+      <select id="theme">
+        <option value="auto">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>
+    <label><input id="baselines" type="checkbox" checked> Baselines</label>
+    <button id="today" type="button">Today</button>
+    <span id="status" aria-live="polite"></span>
+    <span id="stats"></span>
+  </header>
+  <div id="chart"></div>
+</body>
+</html>

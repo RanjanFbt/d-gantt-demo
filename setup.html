@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-Gantt project setup</title>
+  <style>:root{--bg:#fff;--fg:#1f2328;--muted:#656d76;--line:#e3e6ea;--panel:#f6f8fa;--accent:#2f6fdf;--bad:#d1242f;--good:#1a7f37}@media (prefers-color-scheme:dark){:root{--bg:#16181d;--fg:#e6e8eb;--muted:#9aa3ad;--line:#2b3038;--panel:#1d2027;--accent:#6ea2ff;--bad:#ff7b72;--good:#3fb950}}html,body{background:var(--bg);height:100%;color:var(--fg);margin:0;font:13px system-ui,sans-serif}body{flex-direction:column;display:flex}header{border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:center;gap:10px 16px;padding:8px 12px;display:flex}header strong{font-size:14px}header nav{flex-wrap:wrap;gap:2px;display:flex}header nav button{color:var(--fg);cursor:pointer;font:inherit;background:0 0;border:1px solid #0000;border-radius:6px;padding:4px 10px}header nav button[aria-current=step]{background:var(--accent);color:#fff}header nav button:disabled{color:var(--muted);cursor:default}#error{color:var(--bad);margin-left:auto}main{flex:1;min-height:0;overflow:auto}main>section{box-sizing:border-box;flex-direction:column;gap:8px;min-height:100%;padding:10px 12px;display:flex}main>section[hidden]{display:none}.bar{flex-wrap:wrap;align-items:end;gap:8px 12px;display:flex}.bar label{color:var(--muted);flex-direction:column;gap:2px;font-size:12px;display:flex}.bar input,.bar select,.bar button,td input{font:inherit}.bar .next{margin-left:auto}#converter{width:220px}.split{flex:1;grid-template-columns:minmax(0,1fr) 340px;gap:10px;min-height:420px;display:grid}@media (width<=900px){.split{grid-template-columns:1fr;grid-auto-rows:minmax(320px,auto)}}#viewer,#bim{border:1px solid var(--line);min-height:320px;position:relative}#bim{flex:1;min-height:420px}aside{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 10px;overflow:auto}h2{margin:0 0 6px;font-size:14px}.muted{color:var(--muted)}.bad{color:var(--bad)}.good{color:var(--good)}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid var(--line);text-align:left;padding:4px 6px}th{white-space:nowrap;font-weight:600}td input{box-sizing:border-box;width:64px}td input.name{width:130px}td input.areas{width:170px}.tiles{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;display:grid}.tile{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 10px}.tile b{font-variant-numeric:tabular-nums;margin-top:2px;font-size:18px;display:block}.tile small{color:var(--muted)}#tree details{margin:6px 0}#tree summary{cursor:pointer;font-weight:600}#tree ul{margin:4px 0;padding-left:18px}#gantt{border:1px solid var(--line);height:62vh;min-height:320px}</style>
+  <script type="module" crossorigin src="./assets/setup-Dsl2lQCv.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/gantt-CMhVHQkb.js">
+  <link rel="modulepreload" crossorigin href="./assets/site-data-DxOcvsjn.js">
+  <link rel="modulepreload" crossorigin href="./assets/xer-DwhqJl7h.js">
+  <link rel="modulepreload" crossorigin href="./assets/drawings-BdM0BMJT.js">
+</head>
+<body>
+  <header>
+    <strong>Project setup</strong>
+    <nav aria-label="Setup steps">
+      <button data-step="1">1 Drawing</button>
+      <button data-step="2">2 Locations</button>
+      <button data-step="3">3 BIM</button>
+      <button data-step="4">4 Schedule</button>
+    </nav>
+    <span id="error" role="alert"></span>
+  </header>
+  <main>
+    <section id="step1">
+      <div class="bar">
+        <label>Floor plan (DWG or DXF) <input id="file" type="file" accept=".dwg,.dxf"></label>
+        <button id="sample">Use sample plan</button>
+        <label>DWG converter URL <input id="converter" type="text"></label>
+        <label>Drawing units
+          <select id="units">
+            <option value="">From the drawing</option>
+            <option value="0.001">Millimetres</option>
+            <option value="0.01">Centimetres</option>
+            <option value="1">Metres</option>
+          </select>
+        </label>
+      </div>
+      <div class="split">
+        <div id="viewer"></div>
+        <aside id="found"></aside>
+      </div>
+    </section>
+
+    <section id="step2" hidden>
+      <div class="bar"><label>Project name <input id="project" type="text"></label></div>
+      <div class="scroll"><table id="towers"></table></div>
+      <div class="bar"><button id="addTower">Add tower</button><button class="next" data-goto="3">Next: BIM</button></div>
+      <div class="tiles" id="counts"></div>
+      <div id="tree"></div>
+    </section>
+
+    <section id="step3" hidden>
+      <div class="bar">
+        <label>View <select id="storey"></select></label>
+        <span id="bimLabel" class="muted"></span>
+        <button class="next" data-goto="4">Next: Schedule</button>
+      </div>
+      <div id="bim"></div>
+    </section>
+
+    <section id="step4" hidden>
+      <form id="timeline" class="bar">
+        <label>Start <input name="start" type="date" required></label>
+        <label>Target finish <input name="target" type="date"></label>
+        <label>Working week
+          <select name="week"><option value="6">Mon–Sat</option><option value="5">Mon–Fri</option></select>
+        </label>
+        <label>Most crews per trade <input name="crews" type="number" min="1" max="10" required></label>
+        <button>Recommend</button>
+        <span class="next">
+          <button type="button" id="exportXer">Export XER</button>
+          <button type="button" id="exportJson">Export JSON</button>
+        </span>
+      </form>
+      <div class="tiles" id="summary"></div>
+      <div id="advice"></div>
+      <div id="gantt"></div>
+    </section>
+  </main>
+</body>
+</html>
